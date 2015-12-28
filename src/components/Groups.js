@@ -1,40 +1,45 @@
 import React, {Component} from 'react-native';
+import Search from './Groups/Search';
+import List from './Groups/List';
 
 const {
-  StyleSheet,
-  TextInput,
+  ListView,
   View,
 } = React;
 
 class Groups extends Component {
 
-  static defaultProps = {
-    ...Component.defaultProps,
-  }
-
   constructor(props, context) {
     super(props, context);
+
+    this.state = {
+      groups: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      }),
+    };
+
+    this._setGroups = this._setGroups.bind(this);
+  }
+
+  _setGroups(groups) {
+    this.setState({
+      groups: this.state.groups.cloneWithRows(groups),
+    });
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <TextInput
-          placeholder="Enter your group name"
-          style={styles.welcome}
+      <View>
+        <Search
+          setGroups = {this._setGroups}
+          url = "http://vgtu.herokuapp.com/groups/search?q="
+        />
+        <List
+          groups = {this.state.groups}
         />
       </View>
     );
   }
 }
-
-let styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-});
 
 export default Groups;

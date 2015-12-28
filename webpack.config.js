@@ -26,8 +26,13 @@
       loaders: [
         {
           test: /\.js$/,
-          include: /node_modules\/react-native/,
           loader: 'babel',
+          include: [
+            /node_modules\/react-native/,
+            /\/react-native\//,
+            /\/react-native-router\/node_modules/,
+            /\/@exponent/
+          ],
           query: {
             cacheDirectory: true,
             presets: ['es2015', 'stage-1', 'react']

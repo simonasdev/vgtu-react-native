@@ -1,5 +1,6 @@
 import React, {Component} from 'react-native';
-import Groups from './Groups';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+import Groups from './Groups.js';
 
 class App extends Component {
 
@@ -9,7 +10,12 @@ class App extends Component {
 
   render() {
     return (
-      <Groups />
+      <ScrollableTabView
+        tabBarPosition="bottom"
+      >
+        <Groups tabLabel="Groups" />
+        <Groups tabLabel="Groups" />
+      </ScrollableTabView>
     );
   }
 }
