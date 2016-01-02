@@ -14,7 +14,7 @@ class App extends Component {
         tabBarPosition="bottom"
       >
         <Groups tabLabel="Groups" />
-        <Groups tabLabel="Groups" />
+        <Groups tabLabel="Timetables" />
       </ScrollableTabView>
     );
   }

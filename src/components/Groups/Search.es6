@@ -3,7 +3,7 @@ import React, {Component} from 'react-native';
 const {
   View,
   TextInput,
-  Text,
+  StyleSheet,
 } = React;
 
 class Search extends Component {
@@ -23,18 +23,31 @@ class Search extends Component {
 
   render() {
     return (
-      <View>
-        <Text>
-          Back
-        </Text>
+      <View
+        style = {styles.container}
+      >
         <TextInput
           onChangeText = {this.getGroups}
           onSubmitEditing = {this.getGroups}
-          placeholder = "Enter your group name"
+          placeholder = "Enter your group bitch"
+          style = {styles.input}
         />
       </View>
     );
   }
 }
+
+let styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  input: {
+    flex: 1,
+  },
+  clear: {
+    fontSize: 12,
+  },
+});
 
 export default Search;
