@@ -1,4 +1,5 @@
-import React, {Component} from 'react-native';
+import React from 'react-native';
+import Base from './Base.es6';
 import Search from './Groups/Search.es6';
 import List from './Groups/List.es6';
 
@@ -6,14 +7,15 @@ const {
   ListView,
   View,
   Text,
+  StyleSheet,
 } = React;
 
-class Groups extends Component {
+class Groups extends Base {
+
   constructor(props, context) {
     super(props, context);
 
-    this.setGroups = this.setGroups.bind(this);
-    this.setGroup = this.setGroup.bind(this);
+    this._bind('setGroups', 'setGroup');
   }
 
   state = {
@@ -24,20 +26,16 @@ class Groups extends Component {
   }
 
   setGroups(groups) {
-    this.setState({
-      groups: this.state.groups.cloneWithRows(groups),
-    });
+    this.setState({ groups: this.state.groups.cloneWithRows(groups) });
   }
 
   setGroup(group) {
-    this.setState({
-      currentGroup: group,
-    });
+    this.setState({ currentGroup: group });
   }
 
   render() {
     return (
-      <View>
+      <View style = {styles.container}>
         <Search
           setGroups = {this.setGroups}
           url = "http://vgtu.herokuapp.com/groups/search?q="
@@ -51,5 +49,11 @@ class Groups extends Component {
     );
   }
 }
+
+let styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default Groups;

@@ -1,4 +1,5 @@
-import React, {Component} from 'react-native';
+import React, {PropTypes} from 'react-native';
+import Base from '../Base.es6';
 
 const {
   StyleSheet,
@@ -7,12 +8,16 @@ const {
   TouchableHighlight,
 } = React;
 
-class ListItem extends Component {
+class ListItem extends Base {
+  static propTypes = {
+    group: PropTypes.shape({ name: PropTypes.string }).isRequired,
+    onItemPress: PropTypes.func.isRequired,
+  }
 
   constructor(props, context) {
     super(props, context);
 
-    this.handlePress = this.handlePress.bind(this);
+    this._bind('handlePress');
   }
 
   handlePress() {

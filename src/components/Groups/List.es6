@@ -1,4 +1,5 @@
-import React, {Component} from 'react-native';
+import React, {PropTypes} from 'react-native';
+import Base from '../Base.es6';
 import ListItem from './ListItem.es6';
 
 const {
@@ -6,12 +7,16 @@ const {
   ListView,
 } = React;
 
-class List extends Component {
+class List extends Base {
+  static propTypes = {
+    groups: PropTypes.instanceOf(ListView.DataSource).isRequired,
+    setGroup: PropTypes.func.isRequired,
+  }
 
   constructor(props, context) {
     super(props, context);
 
-    this.renderGroup = this.renderGroup.bind(this);
+    this._bind('renderGroup');
   }
 
   renderGroup(group) {
@@ -36,7 +41,7 @@ class List extends Component {
 
 let styles = StyleSheet.create({
   listView: {
-    paddingTop: 10,
+    flex: 90,
   },
 });
 

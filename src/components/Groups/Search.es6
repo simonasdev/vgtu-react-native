@@ -1,6 +1,7 @@
-import React, {Component} from 'react-native';
+import React, {PropTypes} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import _ from 'lodash';
+import Base from '../Base.es6';
 
 const {
   View,
@@ -9,7 +10,13 @@ const {
   TouchableHighlight,
 } = React;
 
-class Search extends Component {
+class Search extends Base {
+  static propTypes = {
+    debounce: PropTypes.number,
+    setGroups: PropTypes.func.isRequired,
+    url: PropTypes.string.isRequired,
+  }
+
   static defaultProps = {
     debounce: 300,
   }
@@ -17,10 +24,7 @@ class Search extends Component {
   constructor(props, context) {
     super(props, context);
 
-    ['handleChange', 'clearInput', 'handleFocus', 'handleBlur'].forEach((prop) => {
-      this[prop] = this[prop].bind(this);
-    });
-
+    this._bind('handleChange', 'clearInput', 'handleFocus', 'handleBlur');
     this.getGroups = _.debounce(this.getGroups.bind(this), this.props.debounce);
   }
 
@@ -56,9 +60,7 @@ class Search extends Component {
 
   render() {
     return (
-      <View
-        style = {styles.container}
-      >
+      <View style = {styles.container}>
         <TextInput
           autoFocus
           onBlur = {this.handleBlur}
@@ -88,13 +90,13 @@ class Search extends Component {
 
 let styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
   input: {
     flex: 1,
-    color: '#FFF',
+    color: '#fff',
   },
 });
 

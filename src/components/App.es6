@@ -1,6 +1,8 @@
 import React, {Component} from 'react-native';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+import Orientation from 'react-native-orientation';
 import Groups from './Groups.es6';
+import Timetable from './Timetable.es6';
 
 const {
   StyleSheet,
@@ -10,6 +12,8 @@ class App extends Component {
 
   constructor(props, context) {
     super(props, context);
+
+    Orientation.lockToPortrait();
   }
 
   render() {
@@ -19,7 +23,7 @@ class App extends Component {
         tabBarPosition="bottom"
       >
         <Groups tabLabel="Groups" />
-        <Groups tabLabel="Timetables" />
+        <Timetable tabLabel="Timetable" />
       </ScrollableTabView>
     );
   }
