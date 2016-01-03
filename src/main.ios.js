@@ -1,5 +1,5 @@
 import {AppRegistry} from 'react-native';
-import App from './components/App';
+import App from './components/App.es6';
 
 class Root extends App {
   static defaultProps = {

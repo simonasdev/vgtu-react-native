@@ -3,7 +3,7 @@
   "description": "A future-facing VGTUApp with React Native",
   "license": "MIT",
   "scripts": {
-    "reverse": "adb reverse tcp:8081 tcp:8080",
+    "android": "adb reverse tcp:8081 tcp:8080 && $NVM_BIN/react-native run-android",
     "bundle": "rnws bundle",
     "test": "eslint src",
     "start": "rnws start"
@@ -12,8 +12,10 @@
     "node": ">=4"
   },
   "dependencies": {
+    "lodash": "^3.10.1",
     "react-native": "^0.17.0",
-    "react-native-scrollable-tab-view": "^0.3.3"
+    "react-native-scrollable-tab-view": "^0.3.3",
+    "react-native-vector-icons": "^1.0.4"
   },
   "devDependencies": {
     "babel-core": "^6.3.17",

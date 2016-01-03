@@ -1,29 +1,37 @@
 import React, {Component} from 'react-native';
-import Search from './Groups/Search';
-import List from './Groups/List';
+import Search from './Groups/Search.es6';
+import List from './Groups/List.es6';
 
 const {
   ListView,
   View,
+  Text,
 } = React;
 
 class Groups extends Component {
-
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      groups: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
-    };
-
-    this._setGroups = this._setGroups.bind(this);
+    this.setGroups = this.setGroups.bind(this);
+    this.setGroup = this.setGroup.bind(this);
   }
 
-  _setGroups(groups) {
+  state = {
+    groups: new ListView.DataSource({
+      rowHasChanged: (row1, row2) => row1 !== row2,
+    }),
+    currentGroup: {},
+  }
+
+  setGroups(groups) {
     this.setState({
       groups: this.state.groups.cloneWithRows(groups),
+    });
+  }
+
+  setGroup(group) {
+    this.setState({
+      currentGroup: group,
     });
   }
 
@@ -31,11 +39,13 @@ class Groups extends Component {
     return (
       <View>
         <Search
-          setGroups = {this._setGroups}
+          setGroups = {this.setGroups}
           url = "http://vgtu.herokuapp.com/groups/search?q="
         />
+        <Text>{this.state.currentGroup.name}</Text>
         <List
           groups = {this.state.groups}
+          setGroup = {this.setGroup}
         />
       </View>
     );

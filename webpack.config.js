@@ -25,7 +25,7 @@
       ],
       loaders: [
         {
-          test: /\.js$/,
+          test: /\.(js|es6)$/,
           loader: 'babel',
           include: [
             /node_modules\/react-native/,
